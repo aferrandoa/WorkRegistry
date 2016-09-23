@@ -14,7 +14,7 @@ var AdminComponent = (function () {
     }
     AdminComponent = __decorate([
         core_1.Component({
-            template: "\n    <h3>ADMIN</h3>\n    <router-outlet></router-outlet>\n  "
+            template: "\n    <h3>USER REGISTERS</h3>\n    <router-outlet></router-outlet>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AdminComponent);

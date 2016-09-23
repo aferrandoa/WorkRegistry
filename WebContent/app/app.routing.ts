@@ -10,7 +10,7 @@ const appRoutes: Routes = [
         component: MainComponent
     },
     {
-        path: 'dashboard', 
+        path: 'dashboard',  
         component: AdminDashboardComponent
     }
 ];

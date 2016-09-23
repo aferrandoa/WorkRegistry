@@ -5,14 +5,19 @@
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http use-expressions="false">
+		<http-basic/>
 		<csrf token-repository-ref="tokenRepository" />
 		<intercept-url pattern="/index.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="//perform_login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/dashboard" access="ROLE_ADMIN" />
-		<logout logout-success-url="/index.html" delete-cookies="JSESSIONID" logout-url="/perform_logout" />
+		<intercept-url pattern="/workServices/**" access="ROLE_USER" />
+		<logout logout-success-url="/index.html" delete-cookies="JSESSIONID"
+			logout-url="/perform_logout" />
 		<form-login login-page='/index.html' login-processing-url="/perform_login"
 			username-parameter="username" password-parameter="password"
 			authentication-failure-url="/index.html?error=true"
 			authentication-success-handler-ref="authenticationSuccessHandler" />
+		<custom-filter ref="csrfFilter" after="LAST"/>
 	</http>
 
 	<b:bean id="authenticationSuccessHandler" class="ferr.workRegister.security.LoginSuccesHandler" />
@@ -21,12 +26,14 @@
 		class="org.springframework.security.web.csrf.CookieCsrfTokenRepository"
 		p:cookieHttpOnly="false" />
 
+	<b:bean id="csrfFilter" class="ferr.workRegister.security.CsrfHeaderFilter" />
+
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
-				<user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="bob" password="bobspassword" authorities="ROLE_USER" />
-			</user-service>
+			<password-encoder hash="bcrypt" />
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username,password, enabled from wrusers.users where username=?"
+				authorities-by-username-query="select username, role from wrusers.user_roles where username =?  " />
 		</authentication-provider>
 	</authentication-manager>
 

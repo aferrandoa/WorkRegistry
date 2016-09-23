@@ -1,25 +1,41 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import { Properties }   from '../properties';
 
 @Injectable()
 export class LoginService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private loginUrl = 'perform_login';
     private logoutUrl = 'perform_logout';
+    private checkUrl="securityServices/checkAutheticated.do"
     isLoggedIn: boolean = false;
   	redirectUrl: String = "";
   
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+    	private properties: Properties) { }
+
+	initialization(): Observable<boolean>{
+		return this.http.get(this.properties.urlApi + this.checkUrl)
+            .map(res => {
+                if (res.text() !== "true") {
+                    return 'false';
+                }
+
+				this.isLoggedIn = true;
+                return 'true';
+            })
+            .catch(this.handleError);
+	}
 
     login(username: String, password: String): Observable<String> {
         let body = 'username=' + username + '&password=' + password;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.loginUrl, body, options)
+        return this.http.post(this.properties.urlApi + this.loginUrl, body, options)
             .map(res => {
-                if (res.url.indexOf('error') !== -1) {
+                if (res.text().length > 0) {
                     return 'false';
                 }
 
@@ -30,7 +46,7 @@ export class LoginService {
     }
     
     logout(): Observable<String>{
-    	return this.http.post(this.logoutUrl, "")
+    	return this.http.post( this.properties.urlApi + this.logoutUrl, "")
     		.map(res => {
     			this.isLoggedIn = false;
     			return true;

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService }  from './login.service';
+import { UserDataService }  from '../services/user-data.service';
+import { UserData }  from '../vo/user-data';	
 
 @Component({
     moduleId: module.id,
@@ -9,6 +11,8 @@ import { LoginService }  from './login.service';
 })
 export class AppLogin {
 
+	@Output() onUserDataLoaded = new EventEmitter<UserData>();
+
     user="";
     password="";
     mode='Observable';
@@ -16,7 +20,17 @@ export class AppLogin {
 
     constructor(
     	private router: Router,
-        private loginService: LoginService) { }
+        private loginService: LoginService,
+        private userDataService: UserDataService) { }
+	
+	 onSubmit() {
+        this.loginService.login(this.user,this.password).subscribe(
+            res => {
+            	this.loginCallback(res)
+            	this.getUserData(null);
+            	}
+   	 	);
+	}
 	
 	loginCallback(res: String){
 		if(res === 'true') {
@@ -30,10 +44,12 @@ export class AppLogin {
    	 		this.loginError = true; 
    	 	}
 	}
-
-    onSubmit() {
-        this.loginService.login(this.user,this.password).subscribe(
-            res => this.loginCallback(res)
-   	 	);
+	
+	getUserData(event){
+		this.userDataService.gteUserData().subscribe(
+			res => { 
+				this.onUserDataLoaded.emit(res);
+			}
+		);
 	}
 }

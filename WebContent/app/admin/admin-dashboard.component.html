@@ -1,6 +1,31 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="form-inline">
+			<div class="form-group">
+				<label for="client">Client</label> 
+				<input [(ngModel)]="client" type="text" class="form-control" id="client" name="client" required>
+			
+				<label for="location">Location</label> 
+				<input [(ngModel)]="location" type="text" class="form-control" id="location" name="location" required>
+				
+				<label for="date">Date</label> 
+				<!-- <input [(ngModel)]="date" type="date" class="form-control" id="date" name="date" required>  -->
+				<input [(ngModel)]="date" datetime-picker date-only="true" class="form-control" id="date" name="date" required />
+				
+				<label for="startTime">Start time</label> 
+				<!--<input [(ngModel)]="startTime" type="date" class="form-control" id="startTime" name="startTime" required>-->
+				<input [(ngModel)]="startTime" datetime-picker date-only="true" class="form-control" id="startTime" name="startTime" required />
+			</div>
+			
+			<button type="button" type="submit" class="btn btn-primary">Add</button>
+		</form>
+	</div>
+</div>
+
 <table class="table">
 	<thead>
 		<tr>
+			<th>Client</th>
 			<th>Location</th>
 			<th>Date</th>
 			<th>Start time</th>
@@ -8,11 +33,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>(Test)Valencia</td>
-			<td>(Test)01/09/2016</td>
-			<td>(Test)14:00</td>
-			<td>(Test)17:00</td>
+		<tr *ngFor="let register of workRegistersList">
+			<td>{{register.cdclient}}</td>
+			<td>{{register.cdlocation}}</td>
+			<td>{{register.workdate}}</td>
+			<td>{{register.starttime}}</td>
+			<td>-</td>
 		</tr>
 	</tbody>
 </table>

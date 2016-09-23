@@ -11,23 +11,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+var properties_1 = require('../properties');
 var LoginService = (function () {
-    function LoginService(http) {
+    function LoginService(http, properties) {
         this.http = http;
+        this.properties = properties;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.loginUrl = 'perform_login';
         this.logoutUrl = 'perform_logout';
+        this.checkUrl = "securityServices/checkAutheticated.do";
         this.isLoggedIn = false;
         this.redirectUrl = "";
     }
+    LoginService.prototype.initialization = function () {
+        var _this = this;
+        return this.http.get(this.properties.urlApi + this.checkUrl)
+            .map(function (res) {
+            if (res.text() !== "true") {
+                return 'false';
+            }
+            _this.isLoggedIn = true;
+            return 'true';
+        })
+            .catch(this.handleError);
+    };
     LoginService.prototype.login = function (username, password) {
         var _this = this;
         var body = 'username=' + username + '&password=' + password;
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.loginUrl, body, options)
+        return this.http.post(this.properties.urlApi + this.loginUrl, body, options)
             .map(function (res) {
-            if (res.url.indexOf('error') !== -1) {
+            if (res.text().length > 0) {
                 return 'false';
             }
             _this.isLoggedIn = true;
@@ -37,7 +52,7 @@ var LoginService = (function () {
     };
     LoginService.prototype.logout = function () {
         var _this = this;
-        return this.http.post(this.logoutUrl, "")
+        return this.http.post(this.properties.urlApi + this.logoutUrl, "")
             .map(function (res) {
             _this.isLoggedIn = false;
             return true;
@@ -52,7 +67,7 @@ var LoginService = (function () {
     };
     LoginService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, properties_1.Properties])
     ], LoginService);
     return LoginService;
 }());

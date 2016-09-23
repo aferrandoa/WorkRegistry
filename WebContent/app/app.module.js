@@ -16,9 +16,12 @@ var app_component_1 = require('./app.component');
 var header_component_1 = require('./baseTemplate/header.component');
 var login_component_1 = require('./baseTemplate/login.component');
 var login_service_1 = require('./baseTemplate/login.service');
+var user_data_service_1 = require('./services/user-data.service');
+var work_register_service_1 = require('./services/work-register.service');
 var main_component_1 = require('./main/main.component');
 var app_routing_1 = require('./app.routing');
 var admin_module_1 = require('./admin/admin.module');
+var properties_1 = require('./properties');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,7 +29,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, http_1.JsonpModule, app_routing_1.routing, admin_module_1.AdminModule],
             declarations: [app_component_1.AppComponent, header_component_1.AppHeader, login_component_1.AppLogin, main_component_1.MainComponent],
-            providers: [login_service_1.LoginService],
+            providers: [login_service_1.LoginService, user_data_service_1.UserDataService, work_register_service_1.WorkRegisterService, properties_1.Properties],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
