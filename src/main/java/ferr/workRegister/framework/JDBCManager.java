@@ -34,4 +34,13 @@ public class JDBCManager<T> extends JdbcDaoSupport {
 		
 		return resultObject;
 	}
+	
+	public int doDelete(String sql, Object[] parameters) {
+		
+		int resultObject = 0;
+		
+		resultObject = getJdbcTemplate().update(sql, parameters);
+		
+		return resultObject;
+	}
 }

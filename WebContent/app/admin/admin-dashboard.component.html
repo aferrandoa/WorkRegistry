@@ -14,7 +14,7 @@
 				
 				<label for="startTime">Start time</label> 
 				<!--<input [(ngModel)]="startTime" type="date" class="form-control" id="startTime" name="startTime" required>-->
-				<input [(ngModel)]="startTime" datetime-picker date-only="true" class="form-control" id="startTime" name="startTime" required />
+				<input [(ngModel)]="startTime" datetime-picker date-only="false" class="form-control" id="startTime" name="startTime" required />
 			</div>
 			
 			<button type="button" type="submit" class="btn btn-primary">Add</button>
@@ -30,6 +30,7 @@
 			<th>Date</th>
 			<th>Start time</th>
 			<th>Finish time</th>
+			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -39,6 +40,9 @@
 			<td>{{register.workdate}}</td>
 			<td>{{register.starttime}}</td>
 			<td>-</td>
+			<td>
+				<button type="button" class="btn btn-default" (click)="clickDelete(register.work_registers_id)">Delete</button>
+			</td>
 		</tr>
 	</tbody>
 </table>

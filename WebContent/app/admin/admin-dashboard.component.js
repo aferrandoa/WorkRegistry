@@ -22,11 +22,18 @@ var AdminDashboardComponent = (function () {
             _this.workRegistersList = res;
         });
     };
+    AdminDashboardComponent.prototype.clickDelete = function (id) {
+        var _this = this;
+        this.workRegisterService.deleteRegister(id).subscribe(function (res) {
+            _this.workRegistersList = [];
+            _this.ngOnInit();
+        });
+    };
     AdminDashboardComponent.prototype.onSubmit = function () {
         var _this = this;
         var newElement = new work_register_1.WorkRegister(this.client, this.location, this.date, this.startTime);
         this.workRegisterService.insertNewRegister(newElement).subscribe(function (res) {
-            _this.workRegistersList.push(newElement);
+            _this.workRegistersList.push(res);
         });
     };
     AdminDashboardComponent = __decorate([

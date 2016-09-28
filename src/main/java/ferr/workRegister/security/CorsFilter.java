@@ -16,7 +16,6 @@ public class CorsFilter implements Filter {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -24,10 +23,11 @@ public class CorsFilter implements Filter {
 			throws IOException, ServletException {
 		
 		HttpServletResponse response = (HttpServletResponse) arg1;
-		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 		response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with, x-xsrf-token, content-type, origin, authorization, accept, client-security-token");
 		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
 
 		if (!"OPTIONS".equals(((HttpServletRequest) arg0).getMethod())) {
 			try {

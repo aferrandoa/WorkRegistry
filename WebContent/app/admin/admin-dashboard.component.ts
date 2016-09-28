@@ -27,13 +27,22 @@ export class AdminDashboardComponent implements OnInit {
 			}
 		);
   	}
+
+	clickDelete(id: Number){
+		this.workRegisterService.deleteRegister(id).subscribe(
+			res => {
+				this.workRegistersList = [];
+				this.ngOnInit();
+			}
+		);
+	}
 	
 	onSubmit() {
 	 	let newElement: WorkRegister = new WorkRegister(this.client, this.location, this.date, this.startTime);
 	 	
         this.workRegisterService.insertNewRegister(newElement).subscribe(
         	res => {
-        		this.workRegistersList.push(newElement);
+        		this.workRegistersList.push(res);
         	}
         );
 	}

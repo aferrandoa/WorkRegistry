@@ -6,9 +6,10 @@
 
 	<http use-expressions="false">
 		<http-basic/>
-		<csrf token-repository-ref="tokenRepository" />
+		<csrf token-repository-ref="tokenRepository"  />
 		<intercept-url pattern="/index.html" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="//perform_login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/perform_login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/perform_logout" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/dashboard" access="ROLE_ADMIN" />
 		<intercept-url pattern="/workServices/**" access="ROLE_USER" />
 		<logout logout-success-url="/index.html" delete-cookies="JSESSIONID"
@@ -17,7 +18,7 @@
 			username-parameter="username" password-parameter="password"
 			authentication-failure-url="/index.html?error=true"
 			authentication-success-handler-ref="authenticationSuccessHandler" />
-		<custom-filter ref="csrfFilter" after="LAST"/>
+		<custom-filter ref="csrfFilter" before="LOGOUT_FILTER"/>
 	</http>
 
 	<b:bean id="authenticationSuccessHandler" class="ferr.workRegister.security.LoginSuccesHandler" />

@@ -65,6 +65,10 @@ drop table user_data;
  --delete from users;
 select * from WRUSERS.WORK_REGISTERS;
 
+delete from WRUSERS.WORK_REGISTERS 
+where work_registers_id = 1
+and cdemployee = '1';
+
  
  insert into users values ('amferrando', '$2a$10$EblZqNptyYvcLm/VwDCVAuBjzZOI7khzdyGPBr08PpIi0na624b8.', true); --123456
  

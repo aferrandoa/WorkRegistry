@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var Properties = (function () {
     function Properties() {
         this.appName = "WorkRegister";
-        this.urlApi = "http://localhost:8080/WorkRegister/";
+        this.urlApi = "/WorkRegister/";
     }
     Properties = __decorate([
         core_1.Injectable(), 

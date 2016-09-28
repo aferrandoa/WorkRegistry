@@ -9,6 +9,7 @@ export class WorkRegisterService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private urlBase = 'workServices/workregister/';
     private urlNewRegister = 'newregister.do';
+    private urlDeleteRegister = 'deleteRegister';
     private urlAllUserReg = "getAllUser.do";
 
     constructor(private http: Http,
@@ -19,12 +20,18 @@ export class WorkRegisterService {
 	    let options = new RequestOptions({ headers: this.headers });
     	
         return this.http.put(this.properties.urlApi + this.urlBase + this.urlNewRegister, body, options)
+            .map(res => <WorkRegister> res.json())
             .catch(this.handleError);
     }
     
     getAllRegisters(): Observable<WorkRegister[]> {
         return this.http.get(this.properties.urlApi + this.urlBase + this.urlAllUserReg)
         	.map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    deleteRegister(registerId: Number): Observable<String> {
+        return this.http.delete(this.properties.urlApi + this.urlBase + this.urlDeleteRegister + "/" + registerId + ".do")
             .catch(this.handleError);
     }
     

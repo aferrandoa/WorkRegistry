@@ -8,5 +8,9 @@ public interface IWorkRegisterDAO {
 
 	List<WorkRegister> listWorkRegistersByEmployee(String cdemployee);
 	
-	int insertWorkRegister(WorkRegister workRegister);
+	int getElementId(WorkRegister workRegister);
+	
+	WorkRegister insertWorkRegister(WorkRegister workRegister);
+	
+	int deleteWorkRegister(int id, String cdemployee);
 }

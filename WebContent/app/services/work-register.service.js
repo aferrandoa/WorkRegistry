@@ -19,17 +19,23 @@ var WorkRegisterService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.urlBase = 'workServices/workregister/';
         this.urlNewRegister = 'newregister.do';
+        this.urlDeleteRegister = 'deleteRegister';
         this.urlAllUserReg = "getAllUser.do";
     }
     WorkRegisterService.prototype.insertNewRegister = function (newregister) {
         var body = JSON.stringify(newregister);
         var options = new http_1.RequestOptions({ headers: this.headers });
         return this.http.put(this.properties.urlApi + this.urlBase + this.urlNewRegister, body, options)
+            .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     WorkRegisterService.prototype.getAllRegisters = function () {
         return this.http.get(this.properties.urlApi + this.urlBase + this.urlAllUserReg)
             .map(this.extractData)
+            .catch(this.handleError);
+    };
+    WorkRegisterService.prototype.deleteRegister = function (registerId) {
+        return this.http.delete(this.properties.urlApi + this.urlBase + this.urlDeleteRegister + "/" + registerId + ".do")
             .catch(this.handleError);
     };
     WorkRegisterService.prototype.extractData = function (res) {
