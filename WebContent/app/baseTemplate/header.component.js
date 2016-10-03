@@ -41,6 +41,10 @@ var AppHeader = (function () {
         var link = ['/admin'];
         this.router.navigate(link);
     };
+    AppHeader.prototype.navControl = function (event) {
+        var link = ['/admin/control'];
+        this.router.navigate(link);
+    };
     AppHeader.prototype.onUserDataLoaded = function (data) {
         this.userData = data;
     };

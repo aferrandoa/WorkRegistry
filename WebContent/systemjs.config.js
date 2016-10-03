@@ -22,10 +22,12 @@
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
       // other libraries
-      'rxjs':                       'npm:rxjs',
+      'rxjs': 'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
-	  'ng2-datetime-picker' : 'npm:ng2-datetime-picker/dist',
-	  'ng2-cookies' : 'npm:ng2-cookies'
+      'ng2-datetime-picker': 'npm:ng2-datetime-picker/dist',
+      'ng2-cookies': 'npm:ng2-cookies',
+      'summernote': 'npm:summernote/dist',
+      'ng2-file-upload': 'npm:ng2-file-upload'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -40,11 +42,18 @@
         main: './index.js',
         defaultExtension: 'js'
       },
-	  'ng2-datetime-picker': {
+      'ng2-datetime-picker': {
         main: 'ng2-datetime-picker.umd.js',
         defaultExtension: 'js'
       },
-	  'ng2-cookies': {
+      'ng2-cookies': {
+        defaultExtension: 'js'
+      },
+      'summernote': {
+        defaultExtension: 'js'
+      },
+      'ng2-file-upload': {
+        main: 'ng2-file-upload.js',
         defaultExtension: 'js'
       }
     }

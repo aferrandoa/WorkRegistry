@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 @Component({
   template:  `
-    <h3>USER REGISTERS</h3>
+    <h3>ADMIN MODULE</h3>
     <router-outlet></router-outlet>
   `
 })

@@ -19,6 +19,7 @@ export class LoginService {
 		return this.http.get(this.properties.urlApi + this.checkUrl)
             .map(res => {
                 if (res.text() !== "true") {
+                    this.isLoggedIn = false;
                     return 'false';
                 }
 

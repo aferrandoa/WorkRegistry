@@ -1,1 +1,40 @@
 @CHARSET "ISO-8859-1";
+
+/*HEADER FIXED TABLE*/
+.header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead > tr > th {
+    border: 1px solid !important;
+    background-color:#337ab7;
+    color: white;
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 300px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 16.6%;
+    float: left;
+}

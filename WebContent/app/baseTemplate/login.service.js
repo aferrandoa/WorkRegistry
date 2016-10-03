@@ -28,6 +28,7 @@ var LoginService = (function () {
         return this.http.get(this.properties.urlApi + this.checkUrl)
             .map(function (res) {
             if (res.text() !== "true") {
+                _this.isLoggedIn = false;
                 return 'false';
             }
             _this.isLoggedIn = true;

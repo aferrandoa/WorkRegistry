@@ -15,6 +15,7 @@ var admin_dashboard_component_1 = require('./admin-dashboard.component');
 var admin_control_component_1 = require('./admin-control.component');
 var forms_1 = require('@angular/forms');
 var ng2_datetime_picker_1 = require('ng2-datetime-picker');
+var ng2_file_upload_1 = require('ng2-file-upload');
 var admin_routing_1 = require('./admin.routing');
 var auth_guard_service_1 = require('../auth-guard.service');
 var AdminModule = (function () {
@@ -26,7 +27,8 @@ var AdminModule = (function () {
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 admin_routing_1.adminRouting,
-                ng2_datetime_picker_1.Ng2DatetimePickerModule
+                ng2_datetime_picker_1.Ng2DatetimePickerModule,
+                ng2_file_upload_1.FileUploadModule
             ],
             declarations: [
                 admin_component_1.AdminComponent,

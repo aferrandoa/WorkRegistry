@@ -5,6 +5,7 @@ import { AdminDashboardComponent }  from './admin-dashboard.component';
 import { AdminControlComponent }  from './admin-control.component';
 import { FormsModule }   from '@angular/forms';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+import { FileUploadModule }   from 'ng2-file-upload';
 
 import { adminRouting } from './admin.routing';
 	
@@ -15,7 +16,8 @@ import { AuthGuard }  from '../auth-guard.service';
     CommonModule,
     FormsModule,
     adminRouting,
-    Ng2DatetimePickerModule
+    Ng2DatetimePickerModule,
+    FileUploadModule
   ],
   declarations: [
     AdminComponent,

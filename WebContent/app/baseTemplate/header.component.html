@@ -15,16 +15,13 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<button type="button" class="btn btn-default navbar-btn" (click)="navAdmin()">Show registers</button>
+				<button *ngIf="loginService.isLoggedIn" type="button" class="btn btn-default navbar-btn" (click)="navAdmin()">Show registers</button>
+				<button *ngIf="loginService.isLoggedIn" type="button" class="btn btn-default navbar-btn" (click)="navControl()">Control</button>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<button *ngIf="!loginService.isLoggedIn" type="button"
-					class="btn btn-default navbar-btn" data-toggle="modal"
-					data-target="#loginModal">Sign in</button>
-				<button *ngIf="loginService.isLoggedIn" type="button"
-					class="btn btn-default navbar-btn" (click)="clickLogout()">
-					Logout</button>
+				<button *ngIf="!loginService.isLoggedIn" type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#loginModal">Sign in</button>
+				<button *ngIf="loginService.isLoggedIn" type="button" class="btn btn-default navbar-btn" (click)="clickLogout()"> Logout</button>
 				<li *ngIf="checkUserData()">
 					<a href="#">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>

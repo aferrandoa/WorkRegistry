@@ -50,6 +50,11 @@ export class AppHeader implements OnInit {
 		let link = ['/admin'];
 		this.router.navigate(link);
 	}
+
+	navControl(event){
+		let link = ['/admin/control'];
+		this.router.navigate(link);
+	}
 	
 	onUserDataLoaded(data: UserData){
 		this.userData = data;
