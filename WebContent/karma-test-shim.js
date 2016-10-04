@@ -82,7 +82,6 @@ function initTestBed(){
 function initTesting () {
   return Promise.all(
     allSpecFiles.map(function (moduleName) {
-      debugger;
       return System.import(moduleName);
     })
   )
