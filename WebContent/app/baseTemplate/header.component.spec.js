@@ -30,7 +30,7 @@ var loginServiceStub = {
     },
     isLoggedIn: true
 };
-describe('BannerComponent', function () {
+describe('Header component', function () {
     beforeEach(testing_1.async(function () {
         testing_1.TestBed.configureTestingModule({
             declarations: [header_component_1.AppHeader, login_component_1.AppLogin],
@@ -51,6 +51,23 @@ describe('BannerComponent', function () {
         el = de.nativeElement;
         fixture.detectChanges();
         expect(el.textContent).toContain('Work Register');
+    });
+    it('should have NULL user data on init', function () {
+        fixture.detectChanges();
+        expect(comp.userData).toBeNull;
+    });
+    it('should show the user name when logged in', function () {
+        fixture.detectChanges();
+        var userData = new user_data_1.UserData();
+        userData.cdemployee = '000000001';
+        userData.name = 'Angel';
+        userData.surname1 = 'Ferrando';
+        userData.surname2 = 'Abalos';
+        comp.userData = userData;
+        fixture.detectChanges();
+        de = fixture.debugElement.query(platform_browser_1.By.css('#headerNameField'));
+        el = de.nativeElement;
+        expect(el.textContent).toContain('Ferrando Abalos, Angel');
     });
 });
 //# sourceMappingURL=header.component.spec.js.map

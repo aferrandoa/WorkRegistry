@@ -35,7 +35,7 @@ let loginServiceStub = {
 };
 
 
-describe('BannerComponent', () => {
+describe('Header component', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -61,5 +61,27 @@ describe('BannerComponent', () => {
         el = de.nativeElement;
         fixture.detectChanges();
         expect(el.textContent).toContain('Work Register');
+    });
+
+    it('should have NULL user data on init', () => {
+        fixture.detectChanges();
+        expect(comp.userData).toBeNull;
+    });
+
+    it('should show the user name when logged in', () => {
+        fixture.detectChanges();
+        let userData: UserData = new UserData();
+        userData.cdemployee = '000000001';
+        userData.name = 'Angel';
+        userData.surname1 = 'Ferrando';
+        userData.surname2 = 'Abalos';
+        
+        comp.userData = userData;
+        fixture.detectChanges();
+
+        de = fixture.debugElement.query(By.css('#headerNameField'));
+        el = de.nativeElement;
+        
+        expect(el.textContent).toContain('Ferrando Abalos, Angel');
     });
 });
